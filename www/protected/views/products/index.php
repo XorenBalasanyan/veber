@@ -25,7 +25,7 @@ $this->breadcrumbs=array(
 				<ul class="inline-block">
 	                <?php foreach ($models as $model):?>
 						<?php  $css_active = Yii::app()->request->getParam('alias') == $model->cpu_uri ? 'class="active"' : ''; ?>
-	                    <li <?=$css_active?>><?= CHtml::link($model->name, '/products/' . $model->cpu_uri);?></li>
+	                    <li <?=$css_active?>><?= CHtml::link($model->name, 'products/' . $model->cpu_uri);?></li>
 	                <?php endforeach;?>
 				</ul>
 				<button class="cmn-toggle-switch cmn-toggle-switch__htx">
