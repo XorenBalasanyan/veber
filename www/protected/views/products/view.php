@@ -14,32 +14,33 @@ $this->breadcrumbs=array(
 		<div class="catalog-wr">
 			<div class="sidebar">
 				<ul class="inline-block">
-                                        <?php foreach ($models as $model):?>
-                                            <li><?= CHtml::link($model->name, $model->cpu_uri);?></li>
-                                        <?php endforeach;?>
+                    <?php foreach ($models as $model):?>
+						<?php  $css_active = Yii::app()->request->getParam('alias') == $model->cpu_uri ? 'class="active"' : ''; ?>
+                        <li <?=$css_active?>><?= CHtml::link($model->name, $model->cpu_uri);?></li>
+                    <?php endforeach;?>
 				</ul>
 				<button class="cmn-toggle-switch cmn-toggle-switch__htx">
 				  <span>toggle menu</span>
 				</button>
 			</div>
-                    
-                    
-                    
+
+
+
 			<div class="catalog">
-                            
+
                             <h1 style="text-align: center;"><?= $kategoryName; ?></h1>
-                            
+
                             <?php foreach ($modelsC as $modelC):?>
-                                            <?php 
-                                                //echo '<pre>'; 
-                                                //var_dump($modelC->products); 
+                                            <?php
+                                                //echo '<pre>';
+                                                //var_dump($modelC->products);
                                                 //echo $modelC->products[0]->status;
                                                 //echo $modelC->products[1]->status;
                                                 //echo $modelC->products[2]->status;
                                             //echo count($modelC->products);
                                             ?>
                                 <?php if (count($modelC->products)):   ?>
-                                        
+
                                         <?php for($i=0; $i < count($modelC->products); $i++): ?>
                                                 <!-- не выводить со статусом 0 -->
                                                 <?php if (!$modelC->products[$i]->status) continue; ?>
@@ -48,7 +49,7 @@ $this->breadcrumbs=array(
                                                         <div style="width: 140px;">
                                                                     <?=CHtml::image(Yii::app()->request->baseUrl . $modelC->products[$i]->urlPrev,$modelC->products[$i]->title)?>
                                                             </div>
-                                                                
+
                                                             <div style="margin-left: 15px;">
                                                                     <div class="catalog-descript">
                                                                             <h3><?= $modelC->products[$i]->title; ?></h3>
@@ -59,25 +60,25 @@ $this->breadcrumbs=array(
                                                                             <input type="text" placeholder="В наличии">
 
                                                                             <div class="price">Цена <span><?= $modelC->products[$i]->price; ?></span></div>
-                                                                    </div>	
+                                                                    </div>
                                                             </div>
                                                     </li>
                                                 </ul>
                                         <?php endfor;?>
-                                
+
                                 <?php endif; ?>
-                            
-                            
-                            
-                            
-                            
-                            
+
+
+
+
+
+
                             <?php endforeach;?>
                         </div>
-                    
-                    
-                    
-                    
+
+
+
+
 		</div>
 	</div>
 

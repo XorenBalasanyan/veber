@@ -3,7 +3,7 @@
 <html>
 <head>
 	<meta name="language" content="ru">
-        <meta charset="utf-8">    
+        <meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta property = "business:contact_data:website" content = "http://ДОМЕН.ru">
@@ -24,7 +24,7 @@
         <![endif]-->
         <script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 
-	
+
 </head>
 
 <body>
@@ -37,8 +37,8 @@
                     </a>
                     <a class="brand" href="#">Admin Panel</a>
                     <div class="nav-collapse collapse">
-                        
-                        
+
+
                         <ul class="nav pull-right">
                             <li class="dropdown">
                                 <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i> Vincent Gabriel <i class="caret"></i>
@@ -55,17 +55,18 @@
                                 </ul>
                             </li>
                         </ul>
-                        
-                        
+
+
                         <ul class="nav">
-                            <li class="active"><?php echo CHtml::link('Главная', array('/admin/default/')); ?></li> 
-                            <li class="active"><?php echo CHtml::link('Вернуться на сайт', array('/site/logout')); ?></li> 
+                            <li class="active"><?php echo CHtml::link('Главная', array('/admin/default/')); ?></li>
+                            <li class="active"><?php echo CHtml::link('Вернуться на сайт', array('/site/logout')); ?></li>
                             <li class="active"><?php echo CHtml::link('Новости', array('/admin/post/')); ?></li>
-                            <li class="active"><?php echo CHtml::link('Услуги', array('/admin/services/')); ?></li> 
+                            <li class="active"><?php echo CHtml::link('Услуги', array('/admin/services/')); ?></li>
                             <li class="active"><?php echo CHtml::link('Категории продукции', array('/admin/categoryProducts/')); ?></li>
-                            <li class="active"><?php echo CHtml::link('Продукция', array('/admin/products/')); ?></li> 
+                            <li class="active"><?php echo CHtml::link('Продукция', array('/admin/products/')); ?></li>
                             <li class="active"><?php echo CHtml::link('Реализованные проекты', array('/admin/projects/')); ?></li>
                             <li class="active"><?php echo CHtml::link('Отзывы', array('/admin/reviews/')); ?></li>
+							<li class="active"><?php echo CHtml::link('Пользователи', array('/user/admin/')); ?></li>
                             <!--
                             <li class="dropdown">
                                 <a href="#" data-toggle="dropdown" class="dropdown-toggle">Settings <b class="caret"></b>
@@ -149,7 +150,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="container-fluid">
             <div class="row-fluid">
                 <div class="span3" id="sidebar">
@@ -205,7 +206,7 @@
                         </li>
                     </ul>
                     -->
-                    
+
                   <div id="sidebar">
                     <?php
                             $this->beginWidget('zii.widgets.CPortlet', array(
@@ -220,35 +221,35 @@
                             $this->endWidget();
                     ?>
                 </div><!-- sidebar -->
-                
+
                 </div>
-                
-                
-                
+
+
+
                 <!--/span-->
                 <div class="span9" id="content">
-                    
+
                     <!--
                     <div class="row-fluid">
-                        
+
                         <div class="alert alert-success">
 							<button type="button" class="close" data-dismiss="alert">&times;</button>
                             <h4>Success</h4>
                         	The operation completed successfully
                         </div>
-                        
-                                
-                        
+
+
+
                         	<div class="navbar">
                             	<div class="navbar-inner">
 	                                <ul class="breadcrumb">
 	                                    <i class="icon-chevron-left hide-sidebar"><a href='#' title="Hide Sidebar" rel='tooltip'>&nbsp;</a></i>
 	                                    <i class="icon-chevron-right show-sidebar" style="display:none;"><a href='#' title="Show Sidebar" rel='tooltip'>&nbsp;</a></i>
 	                                    <li>
-	                                        <a href="#">Dashboard</a> <span class="divider">/</span>	
+	                                        <a href="#">Dashboard</a> <span class="divider">/</span>
 	                                    </li>
 	                                    <li>
-	                                        <a href="#">Settings</a> <span class="divider">/</span>	
+	                                        <a href="#">Settings</a> <span class="divider">/</span>
 	                                    </li>
 	                                    <li class="active">Tools</li>
 	                                </ul>
@@ -256,10 +257,10 @@
                         	</div>
                     	</div>
                     -->
-                    
-                    
+
+
                     <?php echo $content; ?>
-                    
+
                     <!--
                     <div class="row-fluid">
                         <div class="block">
@@ -297,11 +298,11 @@
                             </div>
                         </div>
                     </div> -->
-                    
+
                     <!--
                     <div class="row-fluid">
                         <div class="span6">
-                            
+
                             <div class="block">
                                 <div class="navbar navbar-inner block-header">
                                     <div class="muted pull-left">Users</div>
@@ -344,7 +345,7 @@
                             </div>
                         </div>
                         <div class="span6">
-                            
+
                             <div class="block">
                                 <div class="navbar navbar-inner block-header">
                                     <div class="muted pull-left">Orders</div>
@@ -385,15 +386,15 @@
                                     </table>
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div> -->
-                    
-                    
+
+
                     <!--
                     <div class="row-fluid">
                         <div class="span6">
-                            
+
                             <div class="block">
                                 <div class="navbar navbar-inner block-header">
                                     <div class="muted pull-left">Clients</div>
@@ -434,10 +435,10 @@
                                     </table>
                                 </div>
                             </div>
-                            
+
                         </div>
                         <div class="span6">
-                            
+
                             <div class="block">
                                 <div class="navbar navbar-inner block-header">
                                     <div class="muted pull-left">Invoices</div>
@@ -474,13 +475,13 @@
                                     </table>
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div> -->
-                    
+
                     <!--
                     <div class="row-fluid">
-                        
+
                         <div class="block">
                             <div class="navbar navbar-inner block-header">
                                 <div class="muted pull-left">Gallery</div>
@@ -559,7 +560,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                     </div> -->
                 </div>
             </div>
@@ -567,9 +568,9 @@
             <footer>
                 <p>&copy; Veber Technology <?= date('Y'); ?></p>
             </footer>
-        </div> 
+        </div>
         <!--/.fluid-container-->
-        
+
         <script src="vendors/jquery-1.9.1.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="vendors/easypiechart/jquery.easy-pie-chart.js"></script>

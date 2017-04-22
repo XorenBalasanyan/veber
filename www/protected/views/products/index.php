@@ -23,24 +23,25 @@ $this->breadcrumbs=array(
 		<div class="catalog-wr">
 			<div class="sidebar">
 				<ul class="inline-block">
-                                        <?php foreach ($models as $model):?>
-                                            <li><?= CHtml::link($model->name, 'products/' . $model->cpu_uri);?></li>
-                                        <?php endforeach;?>
+	                <?php foreach ($models as $model):?>
+						<?php  $css_active = Yii::app()->request->getParam('alias') == $model->cpu_uri ? 'class="active"' : ''; ?>
+	                    <li <?=$css_active?>><?= CHtml::link($model->name, '/products/' . $model->cpu_uri);?></li>
+	                <?php endforeach;?>
 				</ul>
 				<button class="cmn-toggle-switch cmn-toggle-switch__htx">
 				  <span>toggle menu</span>
 				</button>
 			</div>
-                    
-                    
-                    
-                    
-                    
+
+
+
+
+
 			<div class="catalog">
                             <h1 style="text-align: center;">Продукция</h1>
-                              
+
                                 <?php foreach ($models as $model):?>
-                                
+
                                     <?php if (count($model->products)):   ?>
                                             <h2 style='text-transform: uppercase; color: #575757; font-size: 20px; margin-bottom: 14px;'><?= $model->name;?></h2>
                                             <?php for($i=0; $i < count($model->products); $i++): ?>
@@ -51,7 +52,7 @@ $this->breadcrumbs=array(
                                                         <div style="width: 140px;">
                                                                     <?=CHtml::image(Yii::app()->request->baseUrl . $model->products[$i]->urlPrev,$model->products[$i]->title)?>
                                                             </div>
-                                                                
+
                                                             <div style="margin-left: 15px;">
                                                                     <div class="catalog-descript">
                                                                             <h3><?= $model->products[$i]->title; ?></h3>
@@ -62,16 +63,16 @@ $this->breadcrumbs=array(
                                                                             <input type="text" placeholder="В наличии">
 
                                                                             <div class="price">Цена <span><?= $model->products[$i]->price; ?></span></div>
-                                                                    </div>	
+                                                                    </div>
                                                             </div>
                                                     </li>
                                                 </ul>
-                                            
+
                                         <?php endfor; ?>
                                     <?php endif;?>
-                                    
+
                                 <?php endforeach;?>
-                               
+
                                 <!--
 				<div class="vid">
 					<button class="flex"></button>
