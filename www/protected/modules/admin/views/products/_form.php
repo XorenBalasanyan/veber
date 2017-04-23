@@ -37,11 +37,31 @@
 		<?php echo $form->textField($model,'title',array('size'=>60,'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'title'); ?>
 	</div>
-        
-        <div class="row">
+
+	<div class="row">
+		<p>Характеристики</p>
+		<div class="">
+			добавить <input type="text" id="characteristic-num" value=""> полей со <input type="text" id="characteristic-type-num" value=""> значениями <button type="button" id="create-characteristic">Создать</button>
+		</div>
+		<div class="characteristic-box">
+			<?php if (!$model->isNewRecord && $model->characteristic_category): ?>
+				<?php $i = 1; ?>
+				<?php foreach ($model->characteristic_category as $characteristic): ?>
+					<div class="characteristic-wrap">
+						<?php foreach ($characteristic->characteristic as $val): ?>
+							<input type="text" class="characteristic-input" name="Products[char][val<?=$i?>][]" value="<?=$val->characteristic_name?>">
+						<?php endforeach; ?>
+						<?php $i++; ?>
+					</div>
+				<?php endforeach; ?>
+			<?php endif; ?>
+		</div>
+	</div>
+
+    <div class="row">
 		<?=CHtml::activeFileField($model, 'icon'); ?>
 	</div>
-        
+
         <?php if ($model->img_uri):?>
 		<div class="row">
 			<?=CHtml::image(Yii::app()->request->baseUrl.$model->urlPrev,$model->title)?>
@@ -85,3 +105,31 @@
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->
+
+<?php
+	Yii::app()->clientScript->registerScript('create-characteristic', '
+		$("#create-characteristic").click(function(e){
+			e.preventDefault();
+			var rowCount   = parseInt($("#characteristic-num").val()),
+				inputCount = parseInt($("#characteristic-type-num").val());
+			if (rowCount >= 0 && inputCount >= 0) {
+				for (var i = 1; i <= rowCount; i++) {
+					var block = "<div class=\'characteristic-wrap\'>";
+					for (var t = 1; t <= inputCount; t++) {
+						var uniqId = parseInt($(".characteristic-input").parent("div.characteristic-wrap").size())+1;
+						block += "<input class=\'characteristic-input\' type=\'text\' name=\'Products[char][val"+uniqId+"][]\' value=\'\'>";
+					}
+					block += "</div>";
+					$(".characteristic-box").prepend(block);
+				}
+			}
+		});
+		$("#characteristic-num, #characteristic-type-num").on("keyup keypress", function(e) {
+			var keyCode = e.keyCode || e.which;
+			if (keyCode === 13) {
+				e.preventDefault();
+				return false;
+			}
+		});
+	', CClientScript::POS_READY);
+?>

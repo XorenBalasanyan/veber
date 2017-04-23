@@ -22,6 +22,8 @@ class Products extends CActiveRecord
         const IMAGE_PATH = '/uploads/products/';
 	public $s_content;
 	public $icon;
+
+    public $char;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -47,6 +49,8 @@ class Products extends CActiveRecord
 				'allowEmpty'=>'true',
 				'tooLarge'=>'Файл не должен превышать 5MB.',
 			),
+        	array('char', 'safe'),
+
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, keywords, description, cpu_uri, img_uri, title, content, characteristic, price, created, category_id, status', 'safe', 'on'=>'search'),
@@ -61,7 +65,8 @@ class Products extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-                    'category' => array(self::BELONGS_TO, 'CategoryProducts', 'category_id'),
+            'category' => array(self::BELONGS_TO, 'CategoryProducts', 'category_id'),
+            'characteristic_category' => array(self::HAS_MANY, 'CharacteristicCategory', 'product_id'),
 		);
 	}
 
@@ -113,9 +118,9 @@ class Products extends CActiveRecord
 		$criteria->compare('title',$this->title,true);
 		$criteria->compare('content',$this->content,true);
 		$criteria->compare('characteristic',$this->characteristic,true);
-                $criteria->compare('price',$this->price,true);
+        $criteria->compare('price',$this->price,true);
 		$criteria->compare('created',$this->created,true);
-                $criteria->compare('category_id',$this->category_id,true);
+        $criteria->compare('category_id',$this->category_id,true);
 		$criteria->compare('status',$this->status);
 
 		return new CActiveDataProvider($this, array(
@@ -133,8 +138,8 @@ class Products extends CActiveRecord
 	{
 		return parent::model($className);
 	}
-        
-        public function beforeSave() {
+
+    public function beforeSave() {
 		if ($this->isNewRecord) {
 
 		  //автоматическая дата
@@ -148,7 +153,40 @@ class Products extends CActiveRecord
 		}
 		return parent::beforeSave();
 	}
-        
+
+    public function afterSave() {
+        if (!empty($this->char) && $this->char != '') {
+            $char_id = [];
+            foreach ($this->characteristic_category as $characteristic) {
+                $char_id[] = $characteristic->id;
+            }
+            $criteria = new CDbCriteria;
+            $criteria->addInCondition('characteristic_id',$char_id);
+            Characteristic::model()->deleteAll($criteria);
+
+            CharacteristicCategory::model()->deleteAll(
+                "`product_id` = :product_id",
+                array(":product_id" => $this->id)
+            );
+            
+            foreach ($this->char as $chars) {
+                if (!empty($chars[0])) {
+                    $characteristiccategory = new CharacteristicCategory;
+                    $characteristiccategory->product_id = $this->id;
+                    $characteristiccategory->save();
+                    foreach ($chars as $val) {
+                        if (!empty($val)) {
+                            $characteristic = new Characteristic;
+                            $characteristic->characteristic_name = $val;
+                            $characteristic->characteristic_id = $characteristiccategory->id;
+                            $characteristic->save();
+                        }
+                    }
+                }
+            }
+        }
+	}
+
         public function beforeDelete()
 	{
 		$this->deleteImage();

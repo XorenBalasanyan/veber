@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 22, 2017 at 02:15 PM
+-- Generation Time: Apr 23, 2017 at 12:15 PM
 -- Server version: 10.1.22-MariaDB
 -- PHP Version: 7.1.4
 
@@ -83,6 +83,29 @@ INSERT INTO `veb_category_products` (`id`, `name`, `cpu_uri`, `status`) VALUES
 (3, 'Инженерные системы', 'inzhenernye-sistemy', 1),
 (4, 'Системы безопасности', 'sistemy-bezopasnosti', 1),
 (5, 'Видеонаблюдение', 'videonablyudenie', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `veb_characteristic`
+--
+
+CREATE TABLE `veb_characteristic` (
+  `id` int(11) NOT NULL,
+  `characteristic_id` int(11) NOT NULL,
+  `characteristic_name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `veb_characteristic_category`
+--
+
+CREATE TABLE `veb_characteristic_category` (
+  `id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -178,7 +201,9 @@ CREATE TABLE `veb_profiles` (
 --
 
 INSERT INTO `veb_profiles` (`user_id`, `first_name`, `last_name`) VALUES
-(1, 'Administrator', 'Admin');
+(1, 'Administrator', 'Admin'),
+(2, 'test', 'test'),
+(3, 'test', 'test');
 
 -- --------------------------------------------------------
 
@@ -319,7 +344,9 @@ CREATE TABLE `veb_users` (
 --
 
 INSERT INTO `veb_users` (`id`, `username`, `password`, `email`, `activkey`, `superuser`, `status`, `create_at`, `lastvisit_at`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'webmaster@example.com', '745384f5abee0f690954a89bd76b0fce', 1, 1, '2017-04-22 13:18:27', '2017-04-22 09:35:14');
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'webmaster@example.com', '745384f5abee0f690954a89bd76b0fce', 1, 1, '2017-04-22 13:18:27', '2017-04-22 09:35:14'),
+(2, 'test', 'd41d8cd98f00b204e9800998ecf8427e', 'test@test.com', '8e9c8e945ebe996e8d1e1ed840664903', 0, 1, '2017-04-22 12:23:02', '0000-00-00 00:00:00'),
+(3, 'test2', '098f6bcd4621d373cade4e832627b4f6', 'test@test.com1', 'b963a389cefc55a58b51ccb98dbb6581', 0, 0, '2017-04-22 12:41:37', '0000-00-00 00:00:00');
 
 --
 -- Indexes for dumped tables
@@ -342,6 +369,20 @@ ALTER TABLE `veb_about`
 --
 ALTER TABLE `veb_category_products`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `veb_characteristic`
+--
+ALTER TABLE `veb_characteristic`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `characteristic_id` (`characteristic_id`);
+
+--
+-- Indexes for table `veb_characteristic_category`
+--
+ALTER TABLE `veb_characteristic_category`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `product_id` (`product_id`);
 
 --
 -- Indexes for table `veb_contact`
@@ -414,6 +455,16 @@ ALTER TABLE `veb_about`
 ALTER TABLE `veb_category_products`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
+-- AUTO_INCREMENT for table `veb_characteristic`
+--
+ALTER TABLE `veb_characteristic`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=167;
+--
+-- AUTO_INCREMENT for table `veb_characteristic_category`
+--
+ALTER TABLE `veb_characteristic_category`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=174;
+--
 -- AUTO_INCREMENT for table `veb_contact`
 --
 ALTER TABLE `veb_contact`
@@ -432,7 +483,7 @@ ALTER TABLE `veb_products`
 -- AUTO_INCREMENT for table `veb_profiles`
 --
 ALTER TABLE `veb_profiles`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `veb_profiles_fields`
 --
@@ -457,7 +508,7 @@ ALTER TABLE `veb_services`
 -- AUTO_INCREMENT for table `veb_users`
 --
 ALTER TABLE `veb_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- Constraints for dumped tables
 --
