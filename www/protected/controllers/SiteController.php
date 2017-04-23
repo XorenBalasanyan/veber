@@ -26,22 +26,22 @@ class SiteController extends Controller
 	 * when an action is not explicitly requested by users.
 	 */
 	public function actionIndex()
-	{       
+	{
                 $criteria = new CDbCriteria();
                 $criteria->limit = 3;
                 $criteria->order = 'id DESC';
                 $criteria->compare('status',1);
                 $models = Post::model()->findAll($criteria);
-                
+
                 $criteria2 = new CDbCriteria();
                 //$criteria2->limit = 6;
                 $criteria2->order = 'id DESC';
                 $criteria2->compare('status',1);
                 $models_services = Services::model()->findAll($criteria2);
-                
+
 		// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
-		$this->render('index', array('models'=>$models, 'models_services'=>$models_services)); 
+		$this->render('index', array('models'=>$models, 'models_services'=>$models_services));
 	}
 
 	/**
@@ -111,6 +111,12 @@ class SiteController extends Controller
 		}
 		// display the login form
 		$this->render('login',array('model'=>$model));
+	}
+
+	public function actionTest($id)
+	{
+        $model = Products::model()->findByPk($id);
+		$this->render('test', array('model'=>$model));
 	}
 
 	/**
